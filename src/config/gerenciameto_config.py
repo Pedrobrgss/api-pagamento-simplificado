@@ -16,7 +16,7 @@ class GerenciamentoConfig:
     def get(self, key):
         """Obtém o valor da variável de ambiente com uma opção de valor padrão."""
         retorno = self._env_variables.get(key,'')
-        if retorno=='':
+        if retorno=='' or retorno==None:
             raise ValueError('Variável de ambiente não configurada!')
         
         return retorno
@@ -28,5 +28,5 @@ class GerenciamentoConfig:
         self._env_variables = {key: os.getenv(key) for key in os.environ}
         
         for value in self._env_variables:
-            if value == None and value=="":
+            if value == None or value=="":
                 raise ValueError('Erro ao carregar variáveis de ambiente')
